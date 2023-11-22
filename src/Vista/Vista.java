@@ -60,16 +60,19 @@ public class Vista {
 		panel_1.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JButton btnNewButton_1 = new JButton("Ver clientes");
+		btnNewButton_1.setToolTipText("Ver los clientes que hay en la base de datos");
 		btnNewButton_1.setForeground(new Color(255, 255, 255));
 		btnNewButton_1.setBackground(new Color(0, 0, 0));
 		panel_1.add(btnNewButton_1);
 		
 		JButton btnNewButton_2 = new JButton("Nuevo cliente");
+		btnNewButton_2.setToolTipText("A\u00E1de clientes a la base de datos");
 		btnNewButton_2.setForeground(new Color(255, 255, 255));
 		btnNewButton_2.setBackground(new Color(0, 0, 0));
 		panel_1.add(btnNewButton_2);
 		
 		JButton btnNewButton = new JButton("Eliminar cliente");
+		btnNewButton.setToolTipText("Elimina clientes de la base de datos");
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setBackground(new Color(0, 0, 0));
 		panel_1.add(btnNewButton);
