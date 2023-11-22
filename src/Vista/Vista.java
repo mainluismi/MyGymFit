@@ -25,6 +25,7 @@ public class Vista {
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
+					
 				}
 			}
 		});
