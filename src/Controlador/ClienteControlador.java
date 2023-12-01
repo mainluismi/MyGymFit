@@ -15,7 +15,7 @@ public class ClienteControlador {
 
     public ClienteControlador(Database baseDeDatos) {
         this.baseDeDatos = baseDeDatos;
-        this.miVista = miVista;
+        this.miVista = null;
     }
     
     public ClienteControlador(Database baseDeDatos, Vista miVista) {
@@ -80,5 +80,14 @@ public class ClienteControlador {
 			e.printStackTrace();
 		}
 		return null;
+	}
+	
+	//Metodos para mostrar la pantalla de carga y la ventana
+	public void mostrarPantallaDeCarga() {
+		this.miVista.mostrarPantallaCarga();
+	}
+	
+	public void mostrarVentana() {
+		this.miVista.inicializarVentana();
 	}
 }

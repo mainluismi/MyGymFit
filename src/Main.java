@@ -12,10 +12,10 @@ public class Main {
         Database database = new Database("jdbc:mysql://localhost:3306/MyGymFit", "root", "root");
         
         Cliente miCliente = new Cliente();
-        ClienteControlador clienteControlador = new ClienteControlador(database);
-        Vista miVista = new Vista(clienteControlador);
+        Vista miVista = new Vista(null);
+        ClienteControlador clienteControlador = new ClienteControlador(database,miVista);
 
-        miVista.mostrarPantallaCarga();
-        miVista.inicializarVentana();
+        clienteControlador.mostrarPantallaDeCarga();
+        clienteControlador.mostrarVentana();
     }
 }
