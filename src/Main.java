@@ -17,6 +17,5 @@ public class Main {
 
         clienteControlador.mostrarPantallaDeCarga();
         clienteControlador.mostrarVentana();
-        System.out.println("Holita");
     }
 }
