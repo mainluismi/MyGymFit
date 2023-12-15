@@ -109,7 +109,6 @@ public class ClienteControlador {
 		return null;
 	}
 	
-	//Metodos para mostrar la pantalla de carga y la ventana
 	public void mostrarPantallaDeCargaLuismi() {
 		this.miVistaLuismi.MostrarPantallaCargaLuismi();
 	}

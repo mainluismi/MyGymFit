@@ -29,7 +29,7 @@ public class Look {
             button.setFont(DEFAULT_FONT);
             button.setForeground(foregroundLuismi);
             button.setBackground(backgroundLuismi);
-            button.setOpaque(true); // Ensure button is opaque for background color
+            button.setOpaque(true);
         }
     }
 
