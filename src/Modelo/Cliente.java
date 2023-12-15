@@ -1,62 +1,66 @@
 package Modelo;
 
 public class Cliente {
-	private int id;
-	private String nombre;
-	private String apellido;
-	private String email;
-	private String fechaAlta;
+	private int idLuismi;
+	private String nombreLuismi;
+	private String apellidoLuismi;
+	private String emailLuismi;
+	private String fechaAltaLuismi;
 	
 	public Cliente() {
 		
 	}
 	
-	public Cliente(int id, String nombre, String apellido, String email, String fechaAlta) {
+	public Cliente(int idLuismi) {
+		this.idLuismi = idLuismi;
+	}
+	
+	public Cliente(int idLuismi, String nombreLuismi, String apellidoLuismi, String emailLuismi, String fechaAltaLuismi) {
 		super();
-		this.id = id;
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.email = email;
-		this.fechaAlta = fechaAlta;
+		this.idLuismi = idLuismi;
+		this.nombreLuismi = nombreLuismi;
+		this.apellidoLuismi = apellidoLuismi;
+		this.emailLuismi = emailLuismi;
+		this.fechaAltaLuismi = fechaAltaLuismi;
 	}
 	
-	public int getId() {
-		return id;
+	public int getIdLuismi() {
+		return idLuismi;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
+	public void setIdLuismi(int idLuismi) {
+		this.idLuismi = idLuismi;
 	}
 	
-	public String getNombre() {
-		return nombre;
+	public String getNombreLuismi() {
+		return nombreLuismi;
 	}
 	
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreLuismi(String nombreLuismi) {
+		this.nombreLuismi = nombreLuismi;
 	}
 	
-	public String getApellido() {
-		return apellido;
+	public String getApellidoLuismi() {
+		return apellidoLuismi;
 	}
 	
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
+	public void setApellidoLuismi(String apellidoLuismi) {
+		this.apellidoLuismi = apellidoLuismi;
 	}
 	
-	public String getEmail() {
-		return email;
+	public String getEmailLuismi() {
+		return emailLuismi;
 	}
 	
-	public void setEmail(String email) {
-		this.email = email;
+	public void setEmailLuismi(String emailLuismi) {
+		this.emailLuismi = emailLuismi;
 	}
 	
-	public String getFechaAlta() {
-		return fechaAlta;
+	public String getFechaAltaLuismi() {
+		return fechaAltaLuismi;
 	}
 	
-	public void setFechaAlta(String fechaAlta) {
-		this.fechaAlta = fechaAlta;
+	public void setFechaAltaLuismi(String fechaAlta) {
+		this.fechaAltaLuismi = fechaAlta;
 	}
 }

@@ -1,10 +1,10 @@
 package Vista;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -14,204 +14,224 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
-import javax.swing.Timer;
+import javax.swing.SwingUtilities;
 
 import Controlador.ClienteControlador;
-import DataBase.Database;
+import Estilo.Look;
 import Modelo.Cliente;
 
 public class Vista {
 
-    public JFrame frame;
-    private JDialog pantallaCarga;
-    private ClienteControlador clienteControlador;
+    public JFrame frameLuismi;
+    private JDialog pantallaCargaLuismi;
+    private ClienteControlador clienteControladorLuismi;
 
-    public Vista(ClienteControlador clienteControlador) {
-        this.clienteControlador = clienteControlador;
-    }
-    
-    /**
-     * @wbp.parser.entryPoint
-     */
-
-    public void inicializarVentana() {
-        frame = new JFrame();
-        frame.setBounds(100, 100, 450, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        JPanel panel = new JPanel();
-        frame.getContentPane().add(panel, BorderLayout.CENTER);
-        panel.setLayout(new BorderLayout(0, 0));
-
-        JTextPane txtpnBienvenidoAMygymfit = new JTextPane();
-        txtpnBienvenidoAMygymfit.setBackground(new Color(255, 255, 255));
-        txtpnBienvenidoAMygymfit.setText("Bienvenido a MyGymFit");
-        panel.add(txtpnBienvenidoAMygymfit, BorderLayout.NORTH);
-
-        JPanel panel_1 = new JPanel();
-        panel.add(panel_1, BorderLayout.CENTER);
-        panel_1.setLayout(new GridLayout(1, 0, 0, 0));
-
-        JButton btnInsertarCliente = new JButton("Insertar cliente");
-        btnInsertarCliente.setToolTipText("Añadir un nuevo cliente");
-        btnInsertarCliente.setForeground(new Color(255, 255, 255));
-        btnInsertarCliente.setBackground(new Color(0, 0, 0));
-        btnInsertarCliente.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                insertarCliente();
-                ventanaInsertar();
-            }
-        });
-        panel_1.add(btnInsertarCliente);
-
-        JButton btnEliminarCliente = new JButton("Eliminar cliente");
-        btnEliminarCliente.setToolTipText("Eliminar un cliente");
-        btnEliminarCliente.setForeground(new Color(255, 255, 255));
-        btnEliminarCliente.setBackground(new Color(0, 0, 0));
-        btnEliminarCliente.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                eliminarCliente();
-            }
-        });
-        panel_1.add(btnEliminarCliente);
-
-        JButton btnVerClientes = new JButton("Ver clientes");
-        btnVerClientes.setToolTipText("Ver la lista de clientes");
-        btnVerClientes.setForeground(new Color(255, 255, 255));
-        btnVerClientes.setBackground(new Color(0, 0, 0));
-        btnVerClientes.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                verClientes();
-            }
-        });
-        panel_1.add(btnVerClientes);
-
-        frame.setVisible(true);
+    public Vista(ClienteControlador clienteControladorLuismi) {
+        this.clienteControladorLuismi = clienteControladorLuismi;
+        Look.setUIFontLuismi();
     }
 
-    public void mostrarPantallaCarga() {
-        pantallaCarga = new JDialog((JFrame) null, "Cargando...", true);
-        pantallaCarga.setLayout(new BorderLayout());
-        pantallaCarga.add(new JLabel("Realizando operación..."), BorderLayout.CENTER);
-        pantallaCarga.setSize(200, 100);
-        pantallaCarga.setLocationRelativeTo(null);
+    public void inicializarVentanaLuismi() {
+        frameLuismi = new JFrame();
+        frameLuismi.setBounds(100, 100, 450, 300);
+        frameLuismi.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        Timer temporizador = new Timer(5000, new ActionListener() {
+        JPanel panelLuismi = new JPanel();
+        frameLuismi.getContentPane().add(panelLuismi, BorderLayout.CENTER);
+        panelLuismi.setLayout(new BorderLayout(0, 0));
+
+        JTextPane txtpnBienvenidoAMygymfitLuismi = new JTextPane();
+        txtpnBienvenidoAMygymfitLuismi.setEditable(false);
+        txtpnBienvenidoAMygymfitLuismi.setText("Bienvenido a MyGymFit");
+        panelLuismi.add(txtpnBienvenidoAMygymfitLuismi, BorderLayout.NORTH);
+
+        JPanel panel_1Luismi = new JPanel();
+        panelLuismi.add(panel_1Luismi, BorderLayout.CENTER);
+        panel_1Luismi.setLayout(new GridLayout(1, 0, 0, 0));
+
+        JButton btnInsertarClienteLuismi = new JButton("Insertar cliente");
+        btnInsertarClienteLuismi.setToolTipText("Añadir un nuevo cliente");
+        btnInsertarClienteLuismi.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mostrarDialogoInsertarClienteLuismi();
+            }
+        });
+        panel_1Luismi.add(btnInsertarClienteLuismi);
+
+        JButton btnEliminarClienteLuismi = new JButton("Eliminar cliente");
+        btnEliminarClienteLuismi.setToolTipText("Eliminar un cliente");
+        btnEliminarClienteLuismi.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                mostrarDialogoEliminarClienteLuismi();
+            }
+        });
+        panel_1Luismi.add(btnEliminarClienteLuismi);
+
+        JButton btnVerClientesLuismi = new JButton("Ver clientes");
+        btnVerClientesLuismi.setToolTipText("Ver la lista de clientes");
+        panel_1Luismi.add(btnVerClientesLuismi);
+
+        Look.setButtonStylesLuismi(btnInsertarClienteLuismi, btnEliminarClienteLuismi, btnVerClientesLuismi);
+        Look.setButtonTextToWhite(btnInsertarClienteLuismi, btnEliminarClienteLuismi, btnVerClientesLuismi);
+
+        frameLuismi.setVisible(true);
+    }
+
+    public void MostrarPantallaCargaLuismi() {
+        pantallaCargaLuismi = new JDialog((JFrame) null, "Cargando...", true);
+        pantallaCargaLuismi.setLayout(new BorderLayout());
+        pantallaCargaLuismi.add(new JLabel("Realizando operación..."), BorderLayout.CENTER);
+        pantallaCargaLuismi.setSize(200, 100);
+        pantallaCargaLuismi.setLocationRelativeTo(null);
+
+        javax.swing.Timer temporizadorLuismi = new javax.swing.Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ocultarPantallaCarga();
-                inicializarVentana();
+                SwingUtilities.invokeLater(() -> {
+                    ocultarPantallaCargaLuismi();
+                    inicializarVentanaLuismi();
+                });
             }
         });
-        temporizador.setRepeats(false);
-        temporizador.start();
+        temporizadorLuismi.setRepeats(false);
+        temporizadorLuismi.start();
 
-        pantallaCarga.setVisible(true);
+        pantallaCargaLuismi.setVisible(true);
     }
 
-    private void ocultarPantallaCarga() {
-        pantallaCarga.setVisible(false);
-        pantallaCarga.dispose();
+
+
+    private void ocultarPantallaCargaLuismi() {
+        pantallaCargaLuismi.setVisible(false);
+        pantallaCargaLuismi.dispose();
     }
 
-    // Method to insert a new client
-    private void insertarCliente() {
-        // You need to implement the logic for inserting a new client in the controller
-        clienteControlador.insertarCliente(new Cliente(/* provide necessary information */));
-    }
+    private void mostrarDialogoEliminarClienteLuismi() {
+        JDialog dialogEliminarLuismi = new JDialog(frameLuismi, "Eliminar Cliente", true);
+        dialogEliminarLuismi.setSize(300, 200);
+        dialogEliminarLuismi.setLayout(new BorderLayout());
 
-    // Method to delete a client
-    private void eliminarCliente() {
-        // You need to implement the logic for deleting a client in the controller
-        clienteControlador.eliminarCliente(new Cliente()/* provide necessary information */);
-    }
+        JPanel panelCamposLuismi = new JPanel(new GridLayout(1, 2));
 
-    // Method to view clients
-    private void verClientes() {
-        // You need to implement the logic for viewing clients in the controller
-        clienteControlador.verClientes();
-    }
-    
-    private void ventanaInsertar() {
-        JDialog dialogInsertar = new JDialog(frame, "Insertar Cliente", true);
-        dialogInsertar.setSize(300, 200);
-        dialogInsertar.setLayout(new BorderLayout());
+        JTextField txtIdLuismi = new JTextField();
 
-        JPanel panelCampos = new JPanel(new GridLayout(4, 2));
+        panelCamposLuismi.add(new JLabel("Dime el id:"));
+        panelCamposLuismi.add(txtIdLuismi);
 
-        JTextField txtNombre = new JTextField();
-        JTextField txtApellido = new JTextField();
-        JTextField txtEmail = new JTextField();
-        JTextField txtFechaAlta = new JTextField();
+        dialogEliminarLuismi.add(panelCamposLuismi, BorderLayout.CENTER);
 
-        panelCampos.add(new JLabel("Nombre:"));
-        panelCampos.add(txtNombre);
-        panelCampos.add(new JLabel("Apellido:"));
-        panelCampos.add(txtApellido);
-        panelCampos.add(new JLabel("Email:"));
-        panelCampos.add(txtEmail);
-        panelCampos.add(new JLabel("Fecha de Alta:"));
-        panelCampos.add(txtFechaAlta);
+        JPanel panelBotonesLuismi = new JPanel();
 
-        dialogInsertar.add(panelCampos, BorderLayout.CENTER);
-
-        JPanel panelBotones = new JPanel();
-
-        JButton btnGuardar = new JButton("Guardar");
-        btnGuardar.addActionListener(new ActionListener() {
+        JButton btnGuardarLuismi = new JButton("Aceptar");
+        btnGuardarLuismi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String nombre = txtNombre.getText();
-                String apellido = txtApellido.getText();
-                String email = txtEmail.getText();
-                String fechaAlta = txtFechaAlta.getText();
+                String idLuismi = txtIdLuismi.getText();
+                int idConvertidoLuismi = Integer.parseInt(idLuismi);
 
-                if (nombre.isEmpty() || apellido.isEmpty() || email.isEmpty() || fechaAlta.isEmpty()) {
-                    JOptionPane.showMessageDialog(dialogInsertar, "Por favor, complete todos los campos.", "Error",
+                if (idLuismi.isEmpty()) {
+                    JOptionPane.showMessageDialog(dialogEliminarLuismi, "Por favor, complete todos los campos.", "Error",
                             JOptionPane.ERROR_MESSAGE);
                 } else {
-                    Cliente nuevoCliente = new Cliente(0, nombre, apellido, email, fechaAlta);
+                    Cliente nuevoClienteLuismi = new Cliente(idConvertidoLuismi);
+                    clienteControladorLuismi.eliminarClienteLuismi(nuevoClienteLuismi);
 
-                    // Insert the new client into the database using the controller
-                    if (clienteControlador != null) {
-                        // Assuming that your ClienteControlador has a reference to the Database
-                        Database database = clienteControlador.getConection();
+                    dialogEliminarLuismi.dispose();
+                }
+            }
+        });
+        
 
-                        // Validate that the Database object is not null
-                        if (database != null) {
-                            // Insert the new client into the database
-                            clienteControlador.insertarCliente(nuevoCliente);
+        JButton btnCancelarLuismi = new JButton("Cancelar");
+        btnCancelarLuismi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialogEliminarLuismi.dispose();
+            }
+        });
+        
+        Look.setButtonStylesLuismi(btnGuardarLuismi, btnCancelarLuismi);
+        Look.setButtonTextToWhite(btnGuardarLuismi, btnCancelarLuismi);
 
-                            // Optionally, you can display a success message
-                            JOptionPane.showMessageDialog(dialogInsertar, "Cliente guardado exitosamente.", "Éxito",
-                                    JOptionPane.INFORMATION_MESSAGE);
+        panelBotonesLuismi.add(btnGuardarLuismi);
+        panelBotonesLuismi.add(btnCancelarLuismi);
 
-                            // Close the JDialog or clear the input fields
-                            dialogInsertar.dispose();
-                        } else {
-                            // Handle the case where the Database object is null
-                        }
+        dialogEliminarLuismi.add(panelBotonesLuismi, BorderLayout.SOUTH);
+
+        dialogEliminarLuismi.setLocationRelativeTo(frameLuismi);
+        dialogEliminarLuismi.setVisible(true);
+    }
+
+    private void mostrarDialogoInsertarClienteLuismi() {
+        JDialog dialogInsertarLuismi = new JDialog(frameLuismi, "Insertar Cliente", true);
+        dialogInsertarLuismi.setSize(300, 200);
+        dialogInsertarLuismi.setLayout(new BorderLayout());
+
+        JPanel panelCamposLuismi = new JPanel(new GridLayout(4, 2));
+
+        JTextField txtNombreLuismi = new JTextField();
+        JTextField txtApellidoLuismi = new JTextField();
+        JTextField txtEmailLuismi = new JTextField();
+        JTextField txtFechaAltaLuismi = new JTextField();
+
+        panelCamposLuismi.add(new JLabel("Nombre:"));
+        panelCamposLuismi.add(txtNombreLuismi);
+        panelCamposLuismi.add(new JLabel("Apellido:"));
+        panelCamposLuismi.add(txtApellidoLuismi);
+        panelCamposLuismi.add(new JLabel("Email:"));
+        panelCamposLuismi.add(txtEmailLuismi);
+        panelCamposLuismi.add(new JLabel("Fecha de Alta:"));
+        panelCamposLuismi.add(txtFechaAltaLuismi);
+
+        dialogInsertarLuismi.add(panelCamposLuismi, BorderLayout.CENTER);
+
+        JPanel panelBotonesLuismi = new JPanel();
+
+        JButton btnGuardarLuismi = new JButton("Guardar");
+        btnGuardarLuismi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nombreLuismi = txtNombreLuismi.getText();
+                String apellidoLuismi = txtApellidoLuismi.getText();
+                String emailLuismi = txtEmailLuismi.getText();
+                String fechaAltaLuismi = txtFechaAltaLuismi.getText();
+
+                if (nombreLuismi.isEmpty() || apellidoLuismi.isEmpty() || emailLuismi.isEmpty() || fechaAltaLuismi.isEmpty()) {
+                    JOptionPane.showMessageDialog(dialogInsertarLuismi, "Por favor, complete todos los campos.", "Error",
+                            JOptionPane.ERROR_MESSAGE);
+                } else {
+                    Cliente nuevoClienteLuismi = new Cliente(0, nombreLuismi, apellidoLuismi, emailLuismi, fechaAltaLuismi);
+
+                    if (clienteControladorLuismi != null) {
+                        clienteControladorLuismi.insertarClienteLuismi(nuevoClienteLuismi);
+                        JOptionPane.showMessageDialog(dialogInsertarLuismi, "Cliente guardado exitosamente.", "Éxito",
+                                JOptionPane.INFORMATION_MESSAGE);
+                        dialogInsertarLuismi.dispose();
                     } else {
-                        // Handle the case where the ClienteControlador object is null
+                        JOptionPane.showMessageDialog(dialogInsertarLuismi, "Error: Controlador no inicializado.", "Error",
+                                JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
         });
 
-        JButton btnCancelar = new JButton("Cancelar");
-        btnCancelar.addActionListener(new ActionListener() {
+        JButton btnCancelarLuismi = new JButton("Cancelar");
+        btnCancelarLuismi.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dialogInsertar.dispose();
+                dialogInsertarLuismi.dispose();
             }
         });
+        
+        Look.setButtonStylesLuismi(btnGuardarLuismi, btnCancelarLuismi);
+        Look.setButtonTextToWhite(btnGuardarLuismi, btnCancelarLuismi);
 
-        panelBotones.add(btnGuardar);
-        panelBotones.add(btnCancelar);
+        panelBotonesLuismi.add(btnGuardarLuismi);
+        panelBotonesLuismi.add(btnCancelarLuismi);
 
-        dialogInsertar.add(panelBotones, BorderLayout.SOUTH);
+        dialogInsertarLuismi.add(panelBotonesLuismi, BorderLayout.SOUTH);
 
-        dialogInsertar.setLocationRelativeTo(frame);
-        dialogInsertar.setVisible(true);
+        dialogInsertarLuismi.setLocationRelativeTo(frameLuismi);
+        dialogInsertarLuismi.setVisible(true);
     }
 }

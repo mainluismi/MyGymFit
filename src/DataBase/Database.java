@@ -5,28 +5,28 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Database {
-    private String url;
-    private String user;
-    private String password;
+    private String urlLuismi;
+    private String userLuismi;
+    private String passwordLuismi;
 
-    public Database(String url, String user, String password) {
-        this.url = url;
-        this.user = user;
-        this.password = password;
+    public Database(String urlLuismi, String userLuismi, String passwordLuismi) {
+        this.urlLuismi = urlLuismi;
+        this.userLuismi = userLuismi;
+        this.passwordLuismi = passwordLuismi;
     }
 
-    public Connection connect() throws SQLException {
+    public Connection connectLuismi() throws SQLException {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver"); 
-            return DriverManager.getConnection(url, user, password);
+            return DriverManager.getConnection(urlLuismi, userLuismi, passwordLuismi);
         } catch (ClassNotFoundException e) {
             throw new SQLException("Database driver not found", e);
         }
     }
 
-    public void disconnect(Connection connection) throws SQLException {
-        if (connection != null && !connection.isClosed()) {
-            connection.close();
+    public void disconnectLuismi(Connection connectionLuismi) throws SQLException {
+        if (connectionLuismi != null && !connectionLuismi.isClosed()) {
+            connectionLuismi.close();
         }
     }
 }

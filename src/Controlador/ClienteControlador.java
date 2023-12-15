@@ -9,40 +9,39 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ClienteControlador {
-    private Cliente miCliente = new Cliente();
-    private Vista miVista;
-    private Database baseDeDatos;
+    private Cliente miClienteLuismi = new Cliente();
+    private Vista miVistaLuismi;
+    private Database miBaseDeDatosLuismi;
 
     public ClienteControlador(Database baseDeDatos) {
-        this.baseDeDatos = baseDeDatos;
-        this.miVista = null;
+        this.miBaseDeDatosLuismi = baseDeDatos;
+        this.miVistaLuismi = null;
     }
     
     public ClienteControlador(Database baseDeDatos, Vista miVista) {
-        this.baseDeDatos = baseDeDatos;
-        this.miVista = miVista;
+        this.miBaseDeDatosLuismi = baseDeDatos;
+        this.miVistaLuismi = miVista;
     }
 
-    public void insertarCliente(Cliente cliente) {
-        Connection connection = null;
-        PreparedStatement preparedStatement = null;
+    public void insertarClienteLuismi(Cliente cliente) {
+        Connection connectionLuismi = null;
+        PreparedStatement preparedStatementLuismi = null;
 
         try {
-            connection = baseDeDatos.connect();
-            // Assuming your database has a table named 'clientes'
-            String sql = "INSERT INTO clientes (nombre, apellido, email, fecha_alta) VALUES (?, ?, ?, ?)";
-            preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setString(1, cliente.getNombre());
-            preparedStatement.setString(2, cliente.getApellido());
-            preparedStatement.setString(3, cliente.getEmail());
-            preparedStatement.setString(4, cliente.getFechaAlta());
+            connectionLuismi = miBaseDeDatosLuismi.connectLuismi();
+            String sql = "INSERT INTO cliente (nombre, apellido, email, fechaAlta) VALUES (?, ?, ?, ?)";
+            preparedStatementLuismi = connectionLuismi.prepareStatement(sql);
+            
+            preparedStatementLuismi.setString(1, cliente.getNombreLuismi());
+            preparedStatementLuismi.setString(2, cliente.getApellidoLuismi());
+            preparedStatementLuismi.setString(3, cliente.getEmailLuismi());
+            preparedStatementLuismi.setString(4, cliente.getFechaAltaLuismi());
+            
 
-            int rowsAffected = preparedStatement.executeUpdate();
+            int rowsAffected = preparedStatementLuismi.executeUpdate();
             if (rowsAffected > 0) {
-                // Insert successful
                 System.out.println("Cliente insertado exitosamente");
             } else {
-                // Insert failed
                 System.out.println("Error al insertar cliente");
             }
 
@@ -50,11 +49,11 @@ public class ClienteControlador {
             e.printStackTrace();
         } finally {
             try {
-                if (preparedStatement != null) {
-                    preparedStatement.close();
+                if (preparedStatementLuismi != null) {
+                    preparedStatementLuismi.close();
                 }
-                if (connection != null) {
-                    connection.close();
+                if (connectionLuismi != null) {
+                    connectionLuismi.close();
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -62,19 +61,47 @@ public class ClienteControlador {
         }
     }
 
-    public void eliminarCliente(Cliente cliente) {
-        // Implement the logic for deleting a client in the database
-        // You can use a similar structure as the insertarCliente method
+    public void eliminarClienteLuismi(Cliente cliente) {
+    	Connection connectionLuismi = null;
+        PreparedStatement preparedStatementLuismi = null;
+
+        try {
+            connectionLuismi = miBaseDeDatosLuismi.connectLuismi();
+            String sql = "DELETE FROM cliente WHERE id=?";
+            preparedStatementLuismi = connectionLuismi.prepareStatement(sql);
+            
+            preparedStatementLuismi.setInt(1, cliente.getIdLuismi());  
+
+            int rowsAffected = preparedStatementLuismi.executeUpdate();
+            if (rowsAffected > 0) {
+                System.out.println("Cliente eliminado correctamente");
+            } else {
+                System.out.println("Error al eliminar cliente");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatementLuismi != null) {
+                    preparedStatementLuismi.close();
+                }
+                if (connectionLuismi != null) {
+                    connectionLuismi.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
     }
 
-    public void verClientes() {
-        // Implement the logic for viewing clients in the database
-        // You can use a similar structure as the insertarCliente method
+    public void verClientesLuismi() {
+        
     }
 
-	public Database getConection() {
+	public Database getConectionLuismi() {
 		try {
-			baseDeDatos.connect();
+			miBaseDeDatosLuismi.connectLuismi();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -83,11 +110,19 @@ public class ClienteControlador {
 	}
 	
 	//Metodos para mostrar la pantalla de carga y la ventana
-	public void mostrarPantallaDeCarga() {
-		this.miVista.mostrarPantallaCarga();
+	public void mostrarPantallaDeCargaLuismi() {
+		this.miVistaLuismi.MostrarPantallaCargaLuismi();
 	}
 	
-	public void mostrarVentana() {
-		this.miVista.inicializarVentana();
+	public void mostrarVentanaLuismi() {
+		this.miVistaLuismi.inicializarVentanaLuismi();
 	}
+	
+	public void setClienteLuismi(Cliente clienteLuismi) {
+        this.miClienteLuismi = clienteLuismi;
+    }
+	
+	 public void setVistaLuismi(Vista vistaLuismi) {
+	    this.miVistaLuismi = vistaLuismi;
+	 }
 }
