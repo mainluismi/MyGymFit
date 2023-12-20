@@ -11,3 +11,7 @@ Ademá, Hay que inplementar una clase "LooK" que gestione toda la configuración
 como el nombre del título de cada ventana, el color y cualquier otra característica
 estética de tu proyecto.
 ###
+
+Añade documentación al proyecto,
+para que sea compatible con "javadoc".
+###
