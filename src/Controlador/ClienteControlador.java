@@ -1,3 +1,12 @@
+/**
+ * La clase `ClienteControlador` es una clase de controlador encargada de manejar operaciones relacionadas con clientes,
+ * interactuando con el modelo (`Cliente`), la vista (`Vista`) y la base de datos (`Database`).
+ * Incluye métodos para insertar y eliminar clientes de la base de datos, así como otros métodos de utilidad.
+ *
+ * @author Luismi
+ * @version 1.8
+ * @since 20/12/23
+ */
 package Controlador;
 
 import Modelo.Cliente;
@@ -9,20 +18,45 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class ClienteControlador {
+	/**
+     * La instancia de cliente asociada con este controlador.
+     */
     private Cliente miClienteLuismi = new Cliente();
+    /**
+     * La instancia de vista asociada con este controlador.
+     */
     private Vista miVistaLuismi;
+    /**
+     * La instancia de base de datos asociada con este controlador.
+     */
     private Database miBaseDeDatosLuismi;
-
+    
+    /**
+     * Construye un nuevo `ClienteControlador` con una referencia a la base de datos.
+     *
+     * @param baseDeDatos La base de datos a la que se conectará el controlador.
+     */
     public ClienteControlador(Database baseDeDatos) {
         this.miBaseDeDatosLuismi = baseDeDatos;
         this.miVistaLuismi = null;
     }
     
+    /**
+     * Construye un nuevo `ClienteControlador` con referencias a la base de datos y la vista.
+     *
+     * @param baseDeDatos La base de datos a la que se conectará el controlador.
+     * @param miVista La vista asociada con este controlador.
+     */
     public ClienteControlador(Database baseDeDatos, Vista miVista) {
         this.miBaseDeDatosLuismi = baseDeDatos;
         this.miVistaLuismi = miVista;
     }
 
+    /**
+     * Inserta un nuevo cliente en la base de datos.
+     *
+     * @param cliente El cliente a insertar en la base de datos.
+     */
     public void insertarClienteLuismi(Cliente cliente) {
         Connection connectionLuismi = null;
         PreparedStatement preparedStatementLuismi = null;
@@ -61,6 +95,11 @@ public class ClienteControlador {
         }
     }
 
+    /**
+     * Elimina un cliente de la base de datos.
+     *
+     * @param cliente El cliente a eliminar de la base de datos.
+     */
     public void eliminarClienteLuismi(Cliente cliente) {
     	Connection connectionLuismi = null;
         PreparedStatement preparedStatementLuismi = null;
@@ -95,10 +134,18 @@ public class ClienteControlador {
         }
     }
 
+    /**
+     * Muestra la lista de clientes.
+     */
     public void verClientesLuismi() {
         
     }
 
+    /**
+     * Obtiene la conexión a la base de datos.
+     *
+     * @return La conexión a la base de datos.
+     */
 	public Database getConectionLuismi() {
 		try {
 			miBaseDeDatosLuismi.connectLuismi();
@@ -109,18 +156,34 @@ public class ClienteControlador {
 		return null;
 	}
 	
+	/**
+     * Muestra la pantalla de carga en la vista.
+     */
 	public void mostrarPantallaDeCargaLuismi() {
 		this.miVistaLuismi.MostrarPantallaCargaLuismi();
 	}
 	
+	/**
+     * Inicializa la ventana en la vista.
+     */
 	public void mostrarVentanaLuismi() {
 		this.miVistaLuismi.inicializarVentanaLuismi();
 	}
 	
+	/**
+     * Establece el cliente asociado con este controlador.
+     *
+     * @param clienteLuismi El cliente a asociar con este controlador.
+     */
 	public void setClienteLuismi(Cliente clienteLuismi) {
         this.miClienteLuismi = clienteLuismi;
     }
 	
+	/**
+     * Establece la vista asociada con este controlador.
+     *
+     * @param vistaLuismi La vista a asociar con este controlador.
+     */
 	 public void setVistaLuismi(Vista vistaLuismi) {
 	    this.miVistaLuismi = vistaLuismi;
 	 }

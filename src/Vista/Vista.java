@@ -1,3 +1,11 @@
+/**
+ * La clase `Vista` representa la interfaz gráfica de usuario para la aplicación MyGymFit.
+ * Proporciona métodos para inicializar la ventana principal y mostrar diálogos para insertar y eliminar clientes.
+ *
+ * @author Luismi
+ * @version 1.8
+ * @since 20/12/23
+ */
 package Vista;
 
 import java.awt.BorderLayout;
@@ -20,15 +28,34 @@ import Modelo.Cliente;
 
 public class Vista {
 
+    /**
+     * El marco principal de la aplicación.
+     */
     public JFrame frameLuismi;
+
+    /**
+     * Diálogo para la pantalla de carga.
+     */
     private JDialog pantallaCargaLuismi;
+
+    /**
+     * El controlador del cliente asociado a esta vista.
+     */
     private ClienteControlador clienteControladorLuismi;
 
+    /**
+     * Constructor de la clase `Vista`.
+     *
+     * @param clienteControladorLuismi El controlador del cliente asociado a esta vista.
+     */
     public Vista(ClienteControlador clienteControladorLuismi) {
         this.clienteControladorLuismi = clienteControladorLuismi;
         Look.setUIFontLuismi();
     }
 
+    /**
+     * Inicializa la ventana principal de la aplicación.
+     */
     public void inicializarVentanaLuismi() {
         frameLuismi = new JFrame();
         frameLuismi.setBounds(100, 100, 450, 300);
@@ -75,6 +102,9 @@ public class Vista {
         frameLuismi.setVisible(true);
     }
 
+    /**
+     * Muestra la pantalla de carga mientras se realiza una operación.
+     */
     public void MostrarPantallaCargaLuismi() {
         pantallaCargaLuismi = new JDialog((JFrame) null, "Cargando...", true);
         pantallaCargaLuismi.setLayout(new BorderLayout());
@@ -97,13 +127,17 @@ public class Vista {
         pantallaCargaLuismi.setVisible(true);
     }
 
-
-
+    /**
+     * Oculta la pantalla de carga.
+     */
     private void ocultarPantallaCargaLuismi() {
         pantallaCargaLuismi.setVisible(false);
         pantallaCargaLuismi.dispose();
     }
 
+    /**
+     * Muestra un diálogo para eliminar un cliente.
+     */
     private void mostrarDialogoEliminarClienteLuismi() {
         JDialog dialogEliminarLuismi = new JDialog(frameLuismi, "Eliminar Cliente", true);
         dialogEliminarLuismi.setSize(300, 200);
@@ -138,7 +172,6 @@ public class Vista {
                 }
             }
         });
-        
 
         JButton btnCancelarLuismi = new JButton("Cancelar");
         btnCancelarLuismi.addActionListener(new ActionListener() {
@@ -147,7 +180,7 @@ public class Vista {
                 dialogEliminarLuismi.dispose();
             }
         });
-        
+
         Look.setButtonStylesLuismi(btnGuardarLuismi, btnCancelarLuismi);
         Look.setButtonTextToWhite(btnGuardarLuismi, btnCancelarLuismi);
 
@@ -160,6 +193,9 @@ public class Vista {
         dialogEliminarLuismi.setVisible(true);
     }
 
+    /**
+     * Muestra un diálogo para insertar un nuevo cliente.
+     */
     private void mostrarDialogoInsertarClienteLuismi() {
         JDialog dialogInsertarLuismi = new JDialog(frameLuismi, "Insertar Cliente", true);
         dialogInsertarLuismi.setSize(300, 200);
@@ -220,7 +256,7 @@ public class Vista {
                 dialogInsertarLuismi.dispose();
             }
         });
-        
+
         Look.setButtonStylesLuismi(btnGuardarLuismi, btnCancelarLuismi);
         Look.setButtonTextToWhite(btnGuardarLuismi, btnCancelarLuismi);
 
